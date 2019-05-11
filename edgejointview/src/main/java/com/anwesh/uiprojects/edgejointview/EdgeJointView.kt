@@ -199,5 +199,27 @@ class EdgeJointView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : EdgeJointView) {
+
+        private val animator : Animator = Animator(view)
+        private val ej : EdgeJoint = EdgeJoint(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            ej.draw(canvas, paint)
+            animator.animate {
+                ej.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            ej.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
 
