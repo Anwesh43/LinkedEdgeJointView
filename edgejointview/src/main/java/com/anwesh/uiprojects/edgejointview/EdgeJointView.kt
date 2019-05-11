@@ -222,5 +222,14 @@ class EdgeJointView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : EdgeJointView {
+            val view : EdgeJointView = EdgeJointView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
 
